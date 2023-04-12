@@ -74,7 +74,7 @@ public class TieredMessageStoreConfig {
     // index file will force rolling to next file after idle specified time, default is 3h
     private int tieredStoreIndexFileRollingIdleInterval = 3 * 60 * 60 * 1000;
     private String tieredMetadataServiceProvider = "org.apache.rocketmq.tieredstore.metadata.TieredMetadataManager";
-    private String tieredBackendServiceProvider = "";
+    private String tieredBackendServiceProvider = "org.apache.rocketmq.tieredstore.provider.posix.PosixFileSegment";
     // file reserved time, default is 72 hour
     private int tieredStoreFileReservedTime = 72;
     // time of forcing commitLog to roll to next file, default is 24 hour
@@ -96,6 +96,14 @@ public class TieredMessageStoreConfig {
     private int readAheadMessageSizeThreshold = 128 * 1024 * 1024;
     private long readAheadCacheExpireDuration = 10 * 1000;
     private double readAheadCacheSizeThresholdRate = 0.3;
+
+    private String tieredStoreFilepath = "";
+
+    // only for oss storage provider
+    private String ossEndpoint = "";
+    private String ossBucket = "";
+    private String ossAccessKey = "";
+    private String ossSecretKey = "";
 
     public static String localHostName() {
         try {
@@ -320,5 +328,45 @@ public class TieredMessageStoreConfig {
 
     public void setReadAheadCacheSizeThresholdRate(double rate) {
         this.readAheadCacheSizeThresholdRate = rate;
+    }
+
+    public String getTieredStoreFilepath() {
+        return tieredStoreFilepath;
+    }
+
+    public void setTieredStoreFilepath(String tieredStoreFilepath) {
+        this.tieredStoreFilepath = tieredStoreFilepath;
+    }
+
+    public String getOssEndpoint() {
+        return ossEndpoint;
+    }
+
+    public void setOssEndpoint(String ossEndpoint) {
+        this.ossEndpoint = ossEndpoint;
+    }
+
+    public String getOssBucket() {
+        return ossBucket;
+    }
+
+    public void setOssBucket(String ossBucket) {
+        this.ossBucket = ossBucket;
+    }
+
+    public String getOssAccessKey() {
+        return ossAccessKey;
+    }
+
+    public void setOssAccessKey(String ossAccessKey) {
+        this.ossAccessKey = ossAccessKey;
+    }
+
+    public String getOssSecretKey() {
+        return ossSecretKey;
+    }
+
+    public void setOssSecretKey(String ossSecretKey) {
+        this.ossSecretKey = ossSecretKey;
     }
 }
